@@ -1,14 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Business Signup | LocoBerry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F5F5F5;
+      color: #1F2937;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }
+    h1 {
+      text-align: center;
+      color: #7C3AED;
+      margin-bottom: 0.25rem;
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+    h2 {
+      text-align: center;
+      color: #14B8A6;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      font-size: 1.3rem;
+    }
+    .section-title {
+      color: #7C3AED;
+      font-size: 1.15rem;
+      margin: 2rem 0 1rem;
+      border-bottom: 2px solid #F472B6;
+      padding-bottom: 6px;
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    .optional {
+      color: #9CA3AF;
+      font-weight: normal;
+    }
+    .required:after {
+      content: " *";
+      color: red;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #7C3AED;
+      box-shadow: 0 0 5px rgba(124, 58, 237, 0.2);
+      outline: none;
+    }
+    select option:first-child {
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: #6B7280;
+    }
+    input:required, textarea:required, select:required {
+      border-color: #7C3AED;
+      background-color: #F9F5FF;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    textarea[name="description"] {
+      max-length: 1000;
+    }
+    button {
+      margin-top: 30px;
+      padding: 14px 28px;
+      background-color: #7C3AED;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #6b21a8;
+    }
+    .consent {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .consent input[type="checkbox"] {
+      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      display: none;
+      font-size: 0.95rem;
+    }
+    .success-message {
+      display: none;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #9CA3AF;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+      input, textarea, select, button {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>LocoBerry</h1>
+    <h2>Business Signup Form</h2>
+    <form id="signupForm" onsubmit="return validateForm(event);">
+      <div class="section-title">Public Business Info</div>
+      <label class="required">Business Name</label>
+      <input type="text" name="business_name" required>
+      <label class="required">Business Category</label>
+      <select name="category" id="category" required>
+        <option value="">Select Category</option>
+        <option value="Food & Beverages">Food & Beverages</option>
+        <option value="Health & Wellness">Health & Wellness</option>
+        <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+        <option value="Retail & Shopping">Retail & Shopping</option>
+        <option value="Home & Living Services">Home & Living Services</option>
+        <option value="Education & Learning">Education & Learning</option>
+        <option value="Events & Entertainment">Events & Entertainment</option>
+        <option value="Travel & Transportation">Travel & Transportation</option>
+        <option value="Pet Services">Pet Services</option>
+        <option value="Tech & Gadgets">Tech & Gadgets</option>
+        <option value="Professional Services">Professional Services</option>
+        <option value="Automotive Services">Automotive Services</option>
+        <option value="Religious & Spiritual Services">Religious & Spiritual Services</option>
+        <option value="Printing & Stationary">Printing & Stationary</option>
+        <option value="Laundry & Cleaning">Laundry & Cleaning</option>
+        <option value="Other">Other</option>
+      </select>
+      <label class="required">City</label>
+      <select name="city" id="city" required onchange="toggleCityInput(this)">
+        <option value="">Select City</option>
+        <option value="Waterloo">Waterloo</option>
+        <option value="Kitchener">Kitchener</option>
+        <option value="Cambridge">Cambridge</option>
+        <option value="Other">Other / Not Listed</option>
+      </select>
+      <div id="otherCityContainer" style="display: none;">
+        <label class="required">Enter Your City</label>
+        <input type="text" name="other_city">
+      </div>
+      <label class="required">Description / Services</label>
+      <textarea name="description" maxlength="1000" required></textarea>
+      <label class="required">Business Email</label>
+      <input type="email" name="public_email" required>
+      <label class="required">Business Phone</label>
+      <input type="tel" name="public_phone" required pattern="[0-9]{3}[-\s]?[0-9]{3}[-\s]?[0-9]{4}" placeholder="e.g. 123-456-7890">
+      <label class="optional">Address</label>
+      <input type="text" name="address">
+      <label class="optional">Instagram</label>
+      <input type="url" name="instagram">
+      <label class="optional">Facebook</label>
+      <input type="url" name="facebook">
+      <label class="optional">WhatsApp</label>
+      <input type="text" name="whatsapp">
+      <label class="optional">X (Twitter)</label>
+      <input type="url" name="twitter">
+      <label class="optional">Website</label>
+      <input type="url" name="website">
+      <label class="optional">Upload Logo</label>
+      <input type="file" name="logo">
+      <div class="section-title">LocoBerry Internal Registration</div>
+      <label class="required">Business Owner / Primary Contact</label>
+      <input type="text" name="owner_name" required>
+      <label class="required">Contact Number</label>
+      <input type="tel" name="contact_phone" required pattern="[0-9]{3}[-\s]?[0-9]{3}[-\s]?[0-9]{4}" placeholder="e.g. 123-456-7890">
+      <label class="optional">Contact Email</label>
+      <input type="email" name="contact_email">
+      <div class="consent">
+        <input type="checkbox" name="consent" id="consentCheckbox" required>
+        <span><label class="required" for="consentCheckbox" style="margin: 0;">I agree to be contacted by LocoBerry and list my business on the platform</label></span>
+      </div>
+      <div class="error-message" id="consentError">Please check the consent box before submitting.</div>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="success-message" id="successMessage">Thank you! Your business has been successfully submitted.</div>
+    <div class="footer">
+      &copy; 2025 LocoBerry | All rights reserved.
+    </div>
+  </div>
+  <script>
+    function toggleCityInput(select) {
+      const otherCityField = document.getElementById('otherCityContainer');
+      otherCityField.style.display = (select.value === 'Other') ? 'block' : 'none';
+    }
+    function validateForm(event) {
+      const category = document.getElementById('category');
+      const city = document.getElementById('city');
+      const consent = document.getElementById('consentCheckbox');
+      const consentError = document.getElementById('consentError');
+      const successMessage = document.getElementById('successMessage');
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Business Signup | LocoBerry</title>
-    </head>
-    <body>
-        <h1>Business Signup Page</h1>
-        <p>This is a placeholder. Real form to be added here.</p>
-    </body>
-    </html>
-    
+      if (category.value === '' || city.value === '') {
+        alert('Please select both a valid category and city.');
+        return false;
+      }
+
+      if (!consent.checked) {
+        consentError.style.display = 'block';
+        return false;
+      } else {
+        consentError.style.display = 'none';
+      }
+
+      event.preventDefault();
+      document.getElementById('signupForm').style.display = 'none';
+      successMessage.style.display = 'block';
+      return false;
+    }
+  </script>
+</body>
+</html>
