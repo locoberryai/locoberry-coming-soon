@@ -15,7 +15,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
       padding: 0 20px;
     }
@@ -87,84 +87,14 @@
       font-weight: 600;
     }
     .footer {
-      position: absolute;
-      bottom: 20px;
+      margin-top: 60px;
+      text-align: center;
       font-size: 0.9rem;
       color: #9CA3AF;
     }
-  
-  .canadian-label {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background-color: rgba(214, 40, 40, 0.05);
-    color: #D62828;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Poppins', sans-serif;
-    z-index: 999;
-    box-shadow: 0 0 4px rgba(0,0,0,0.05);
-  }
-  .canadian-label .leaf {
-    font-size: 1rem;
-  }
-  @media (max-width: 600px) {
-    .canadian-label {
-      top: 10px;
-      right: 10px;
-      font-size: 0.75rem;
-      padding: 4px 10px;
-    }
-    .canadian-label .leaf {
-      font-size: 0.85rem;
-    }
-  }
-
-
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 2rem !important;
-      margin-top: 24px !important;
-    }
-    h2 {
-      font-size: 1.2rem !important;
-    }
-    p {
-      font-size: 0.95rem;
-    }
-  }
-
-
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 2rem !important;
-      margin-top: 36px !important;
-    }
-    h2 {
-      font-size: 1.2rem !important;
-    }
-    p {
-      font-size: 0.95rem;
-    }
-    footer {
-      margin-top: 20px;
-      margin-bottom: 100px;
-    }
-  }
-
-</style>
+  </style>
 </head>
 <body>
-
-<div class="canadian-label">
-  <span class="leaf">🍁</span> Canadian Innovation
-</div>
-
   <h1>Loco<span style="color:#14B8A6">Berry</span><span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></h1>
   <h2>Smarter local searches, reimagined by AI</h2>
   <p>We’re building an AI-powered platform to help you find and connect with trusted local businesses—fast, friendly, and empowering.</p>
