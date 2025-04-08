@@ -19,17 +19,25 @@
       padding: 40px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .logo {
+      width: auto;
+      max-height: 60px;
+      margin-bottom: 10px;
     }
     h1 {
       color: #7C3AED;
       font-size: 2rem;
-      text-align: center;
+      margin: 0;
     }
     h2 {
       color: #14B8A6;
-      text-align: center;
       font-weight: 600;
-      margin-bottom: 2rem;
+      margin: 10px 0 20px;
+    }
+    form {
+      text-align: left;
     }
     label {
       display: block;
@@ -80,12 +88,23 @@
       font-weight: bold;
       margin-top: 20px;
     }
+    .success-message a {
+      display: inline-block;
+      margin-top: 15px;
+    }
+    .success-message img {
+      height: 40px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <a href="index.html">
+      <img src="images/locoberry-logo.png" alt="LocoBerry Logo" class="logo">
+    </a>
     <h1>LocoBerry</h1>
     <h2>Business Signup Form</h2>
+
     <form id="signupForm">
       <label class="required">Business Name</label>
       <input type="text" name="business_name" required>
@@ -170,12 +189,15 @@
       </label>
 
       <input type="hidden" name="submission_timestamp" id="timestamp">
-
       <button type="submit">Submit</button>
     </form>
 
     <div class="success-message" id="successMessage">
       ✅ Thank you! Your business has been successfully submitted.
+      <br>
+      <a href="index.html">
+        <img src="images/locoberry-logo.png" alt="Back to Home">
+      </a>
     </div>
   </div>
 
@@ -184,7 +206,7 @@
     const otherCityField = document.getElementById("otherCityField");
     const otherCityInput = document.getElementById("other_city");
 
-    cityDropdown.addEventListener("change", function() {
+    cityDropdown.addEventListener("change", function () {
       if (this.value === "Other") {
         otherCityField.style.display = "block";
         otherCityInput.setAttribute("required", "required");
@@ -194,11 +216,11 @@
       }
     });
 
-    document.getElementById("signupForm").addEventListener("submit", function(event) {
+    document.getElementById("signupForm").addEventListener("submit", function (event) {
       event.preventDefault();
 
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{{2,}}$/;
-      const phonePattern = /^\d{{3}}[-\s]?\d{{3}}[-\s]?\d{{4}}$/;
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+      const phonePattern = /^\d{3}[-\s]?\d{3}[-\s]?\d{4}$/;
 
       const publicEmail = document.getElementById("public_email").value;
       const contactEmail = document.getElementById("contact_email").value;
