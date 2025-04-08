@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Business Signup | LocoBerry</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -21,20 +21,39 @@
       box-shadow: 0 0 15px rgba(0,0,0,0.05);
       text-align: center;
     }
-    .logo {
-      width: auto;
-      max-height: 60px;
-      margin-bottom: 10px;
-    }
     h1 {
+      font-size: 2.5rem;
       color: #7C3AED;
-      font-size: 2rem;
-      margin: 0;
+      margin-bottom: 0.2rem;
     }
     h2 {
+      font-size: 1.5rem;
       color: #14B8A6;
-      font-weight: 600;
-      margin: 10px 0 20px;
+      margin-top: 0.3rem;
+    }
+    .dots {
+      display: inline-flex;
+      gap: 4px;
+      vertical-align: -0.1em;
+      margin-left: 3px;
+    }
+    .dot {
+      width: 6.5px;
+      height: 6.5px;
+      background-color: #F472B6;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.7; }
     }
     form {
       text-align: left;
@@ -89,20 +108,17 @@
       margin-top: 20px;
     }
     .success-message a {
-      display: inline-block;
-      margin-top: 15px;
-    }
-    .success-message img {
-      height: 40px;
+      color: #7C3AED;
+      font-weight: bold;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="index.html">
-      <img src="images/locoberry-logo.png" alt="LocoBerry Logo" class="logo">
+    <a href="index.html" style="text-decoration: none;">
+      <h1>LocoBerry<span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></h1>
     </a>
-    <h1>LocoBerry</h1>
     <h2>Business Signup Form</h2>
 
     <form id="signupForm">
@@ -194,9 +210,10 @@
 
     <div class="success-message" id="successMessage">
       ✅ Thank you! Your business has been successfully submitted.
-      <br>
+      <br><br>
       <a href="index.html">
-        <img src="images/locoberry-logo.png" alt="Back to Home">
+        Return to <strong>LocoBerry</strong>
+        <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
       </a>
     </div>
   </div>
