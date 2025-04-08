@@ -51,6 +51,11 @@
       border: 1px solid #ccc;
       margin-top: 6px;
     }
+    select option:first-child {
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #6B7280;
+    }
     textarea {
       resize: vertical;
       min-height: 100px;
@@ -88,36 +93,36 @@
       <label class="required">Business Category</label>
       <select name="category" id="category" required>
         <option value="">Select Category</option>
-        <option value="Food & Beverages">Food & Beverages</option>
-        <option value="Health & Wellness">Health & Wellness</option>
-        <option value="Beauty & Personal Care">Beauty & Personal Care</option>
-        <option value="Retail & Shopping">Retail & Shopping</option>
-        <option value="Home & Living Services">Home & Living Services</option>
-        <option value="Education & Learning">Education & Learning</option>
-        <option value="Events & Entertainment">Events & Entertainment</option>
-        <option value="Travel & Transportation">Travel & Transportation</option>
-        <option value="Pet Services">Pet Services</option>
-        <option value="Tech & Gadgets">Tech & Gadgets</option>
-        <option value="Professional Services">Professional Services</option>
-        <option value="Automotive Services">Automotive Services</option>
-        <option value="Religious & Spiritual Services">Religious & Spiritual Services</option>
-        <option value="Printing & Stationary">Printing & Stationary</option>
-        <option value="Laundry & Cleaning">Laundry & Cleaning</option>
-        <option value="Other">Other</option>
+        <option>Food & Beverages</option>
+        <option>Health & Wellness</option>
+        <option>Beauty & Personal Care</option>
+        <option>Retail & Shopping</option>
+        <option>Home & Living Services</option>
+        <option>Education & Learning</option>
+        <option>Events & Entertainment</option>
+        <option>Travel & Transportation</option>
+        <option>Pet Services</option>
+        <option>Tech & Gadgets</option>
+        <option>Professional Services</option>
+        <option>Automotive Services</option>
+        <option>Religious & Spiritual Services</option>
+        <option>Printing & Stationary</option>
+        <option>Laundry & Cleaning</option>
+        <option>Other</option>
       </select>
 
       <label class="required">City</label>
-      <select name="city" id="city" required onchange="document.getElementById('otherCityField').style.display = this.value === 'Other' ? 'block' : 'none'">
+      <select name="city" id="city" required>
         <option value="">Select City</option>
-        <option value="Waterloo">Waterloo</option>
-        <option value="Kitchener">Kitchener</option>
-        <option value="Cambridge">Cambridge</option>
-        <option value="Other">Other / Not Listed</option>
+        <option>Waterloo</option>
+        <option>Kitchener</option>
+        <option>Cambridge</option>
+        <option>Other</option>
       </select>
 
       <div id="otherCityField" style="display:none;">
-        <label class="required">Enter City</label>
-        <input type="text" name="other_city">
+        <label class="required">Enter Your City</label>
+        <input type="text" name="other_city" id="other_city">
       </div>
 
       <label class="required">Description / Services</label>
@@ -172,57 +177,71 @@
     <div class="success-message" id="successMessage">
       ✅ Thank you! Your business has been successfully submitted.
     </div>
-
-    <script>
-      document.getElementById("signupForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phonePattern = /^\d{3}[-\s]?\d{3}[-\s]?\d{4}$/;
-
-        const publicEmail = document.getElementById("public_email").value;
-        const contactEmail = document.getElementById("contact_email").value;
-        const publicPhone = document.getElementById("public_phone").value;
-        const contactPhone = document.getElementById("contact_phone").value;
-        const consent = document.getElementById("consentCheckbox").checked;
-
-        if (!emailPattern.test(publicEmail) || (contactEmail && !emailPattern.test(contactEmail))) {
-          alert("Please enter valid email addresses.");
-          return;
-        }
-
-        if (!phonePattern.test(publicPhone) || !phonePattern.test(contactPhone)) {
-          alert("Please enter valid 10-digit phone numbers.");
-          return;
-        }
-
-        if (!consent) {
-          alert("You must agree to be contacted.");
-          return;
-        }
-
-        document.getElementById("timestamp").value = new Date().toISOString();
-
-        const formData = new FormData(document.getElementById("signupForm"));
-
-        fetch("https://formspree.io/f/mldjoyek", {
-          method: "POST",
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        }).then(response => {
-          if (response.ok) {
-            document.getElementById("signupForm").style.display = "none";
-            document.getElementById("successMessage").style.display = "block";
-          } else {
-            alert("There was an error submitting your form.");
-          }
-        }).catch(error => {
-          alert("There was an error submitting your form.");
-        });
-      });
-    </script>
   </div>
+
+  <script>
+    const cityDropdown = document.getElementById("city");
+    const otherCityField = document.getElementById("otherCityField");
+    const otherCityInput = document.getElementById("other_city");
+
+    cityDropdown.addEventListener("change", function() {
+      if (this.value === "Other") {
+        otherCityField.style.display = "block";
+        otherCityInput.setAttribute("required", "required");
+      } else {
+        otherCityField.style.display = "none";
+        otherCityInput.removeAttribute("required");
+      }
+    });
+
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{{2,}}$/;
+      const phonePattern = /^\d{{3}}[-\s]?\d{{3}}[-\s]?\d{{4}}$/;
+
+      const publicEmail = document.getElementById("public_email").value;
+      const contactEmail = document.getElementById("contact_email").value;
+      const publicPhone = document.getElementById("public_phone").value;
+      const contactPhone = document.getElementById("contact_phone").value;
+      const consent = document.getElementById("consentCheckbox").checked;
+
+      if (!emailPattern.test(publicEmail) || (contactEmail && !emailPattern.test(contactEmail))) {
+        alert("Please enter valid email addresses.");
+        return;
+      }
+
+      if (!phonePattern.test(publicPhone) || !phonePattern.test(contactPhone)) {
+        alert("Please enter valid 10-digit phone numbers.");
+        return;
+      }
+
+      if (!consent) {
+        alert("You must agree to be contacted.");
+        return;
+      }
+
+      document.getElementById("timestamp").value = new Date().toISOString();
+
+      const formData = new FormData(document.getElementById("signupForm"));
+
+      fetch("https://formspree.io/f/mldjoyek", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          document.getElementById("signupForm").style.display = "none";
+          document.getElementById("successMessage").style.display = "block";
+        } else {
+          alert("There was an error submitting your form.");
+        }
+      }).catch(error => {
+        alert("There was an error submitting your form.");
+      });
+    });
+  </script>
 </body>
 </html>
