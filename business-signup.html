@@ -113,9 +113,36 @@
       font-weight: bold;
       text-decoration: none;
     }
-  </style>
+  
+  .canadian-label {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(214, 40, 40, 0.05);
+    color: #D62828;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Poppins', sans-serif;
+    z-index: 999;
+    box-shadow: 0 0 4px rgba(0,0,0,0.05);
+  }
+  .canadian-label .leaf {
+    font-size: 1rem;
+  }
+
+</style>
 </head>
 <body>
+
+<div class="canadian-label">
+  <span class="leaf">🍁</span> Canadian Innovation
+</div>
+
   <div class="container">
     <a href="index.html" style="text-decoration: none;">
       <h1>LocoBerry<span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></h1>
@@ -200,7 +227,7 @@
       <label class="optional">Contact Email</label>
       <input type="email" name="contact_email" id="contact_email">
 
-      <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: center; border: 1px dashed #ccc; padding: 10px 0;"><input type="checkbox" id="consentCheckbox" required style="margin-bottom: 10px;"><label for="consentCheckbox" style="font-weight: light;">I agree to be contacted by LocoBerry and list my business on the platform</label></div>
+      <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: center; border: 1px dashed #ccc; padding: 10px 0;"><input type="checkbox" id="consentCheckbox" required style="margin-bottom: 10px;"><label for="consentCheckbox" style="font-weight: bold;">I agree to be contacted by LocoBerry and list my business on the platform</label></div>
 
       <input type="hidden" name="submission_timestamp" id="timestamp">
       <button type="submit">Submit</button>
