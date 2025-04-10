@@ -175,13 +175,14 @@ footer {
   <p>We’re building an AI-powered platform to help you find and connect with trusted local businesses—fast, friendly, and empowering.</p>
   <p>Launching soon in Waterloo-Kitchener-Cambridge (and beyond)!</p>
 
-  <form action="https://formspree.io/f/mwplnpze" method="POST">
+  <form action="https://formspree.io/f/your-form-id" method="POST">
     <input type="email" name="email" placeholder="Enter your email for updates" required>
     <label>
       <input type="checkbox" name="is_business"> I’m a local business owner interested in early listing
     </label>
     <button type="submit">Notify Me</button>
   </form>
+<div id="notifySuccess" style="display:none; color: green; font-weight: bold; margin-top: 10px;">Thank you! You’ll be notified when we launch.</div>
 
   
 
@@ -200,6 +201,43 @@ footer {
     <h2 style="color: #7C3AED; font-size: 1.3rem;">Get in Touch</h2>
     <p style="margin: 0.5rem 0;">📧 Email: <a href="mailto:info@locoberry.ca">info@locoberry.ca</a></p>
     <p style="margin: 0.5rem 0;">📞 Phone: <a href="tel:2268994340">226-899-4340</a></p>  </section>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("notifyForm");
+      const checkbox = document.getElementById("businessInterest");
+      const email = document.getElementById("notifyEmail");
+
+      form.addEventListener("submit", function (e) {
+        if (!checkbox.checked) {
+          e.preventDefault();
+          alert("Please check the box to confirm you're a business owner interested in early listing.");
+          return;
+        }
+
+        // Inject a hidden timestamp
+        const timestamp = document.createElement("input");
+        timestamp.type = "hidden";
+        timestamp.name = "submission_timestamp";
+        timestamp.value = new Date().toISOString();
+        form.appendChild(timestamp);
+
+        // Show local success message instead of redirecting
+        e.preventDefault();
+        form.style.display = "none";
+        document.getElementById("notifySuccess").style.display = "block";
+
+        fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).catch(err => {
+          alert("There was an error submitting the form.");
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
