@@ -221,19 +221,13 @@
       <input type="text" name="address">
 
       <label class="optional">Instagram</label>
-      <input type="url" name="instagram">
+      <input type="text" name="instagram" placeholder="@yourhandle">
 
-      <label class="optional">Facebook</label>
-      <input type="url" name="facebook">
-
-      <label class="optional">WhatsApp</label>
+      <!-- Facebook field hidden --><label class="optional">WhatsApp</label>
       <input type="text" name="whatsapp">
 
-      <label class="optional">X (Twitter)</label>
-      <input type="url" name="twitter">
-
-      <label class="optional">Website</label>
-      <input type="url" name="website">
+      <!-- Twitter (X) field hidden --><label class="optional">Website</label>
+      <input type="text" name="website" id="website">
 
       <!-- Logo upload field temporarily hidden: <label class="optional">Upload Logo</label><input type="file" name="logo"> -->
 
@@ -288,8 +282,10 @@
       const publicPhone = document.getElementById("public_phone").value;
       const contactPhone = document.getElementById("contact_phone").value;
       const consent = document.getElementById("consentCheckbox").checked;
+      const website = document.getElementById("website").value.trim();
+      const websitePattern = /^(https?:\/\/)?(www\.)?([\w-]+\.)+[\w]{2,}(\/\S*)?$/;
 
-      if (!emailPattern.test(publicEmail) || (contactEmail && !emailPattern.test(contactEmail))) {
+      if (!emailPattern.test(publicEmail) || (website && !websitePattern.test(website)) || (contactEmail && !emailPattern.test(contactEmail))) {
         alert("Please enter valid email addresses.");
         return;
       }
