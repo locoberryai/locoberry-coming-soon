@@ -158,7 +158,7 @@
 
   <div class="container">
     <a href="index.html" style="text-decoration: none;">
-      <h1>Loco<span style="color:#14B8A6">Berry</span><span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></h1>
+      <h1>LocoBerry<span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></h1>
     </a>
     <h2>Business Signup Form</h2>
 
@@ -228,8 +228,7 @@
       <label class="optional">Website</label>
       <input type="url" name="website">
 
-      <label class="optional">Upload Logo</label>
-      <input type="file" name="logo">
+      <!-- Logo upload field temporarily hidden: <label class="optional">Upload Logo</label><input type="file" name="logo"> -->
 
       <label class="required">Business Owner / Primary Contact</label>
       <input type="text" name="owner_name" required>
@@ -320,5 +319,31 @@
       });
     });
   </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function validateEmail(input) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    input.style.borderColor = pattern.test(input.value.trim()) ? "#ccc" : "red";
+  }
+
+  function validatePhone(input) {
+    const pattern = /^\d{3}[-\s]?\d{3}[-\s]?\d{4}$/;
+    input.style.borderColor = pattern.test(input.value.trim()) ? "#ccc" : "red";
+  }
+
+  const emailFields = [document.getElementById("public_email"), document.getElementById("contact_email")];
+  const phoneFields = [document.getElementById("public_phone"), document.getElementById("contact_phone")];
+
+  emailFields.forEach(field => {
+    if (field) field.addEventListener("input", () => validateEmail(field));
+  });
+
+  phoneFields.forEach(field => {
+    if (field) field.addEventListener("input", () => validatePhone(field));
+  });
+});
+</script>
+
 </body>
 </html>
