@@ -76,7 +76,33 @@
         font-size: 0.85rem;
       }
     }
-  </style>
+  
+    .dots {
+      display: inline-flex;
+      gap: 4px;
+      vertical-align: -0.1em;
+      margin-left: 3px;
+    }
+    .dot {
+      width: 6.5px;
+      height: 6.5px;
+      background-color: #F472B6;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.7; }
+    }
+
+</style>
 </head>
 <body>
   <div class="canadian-label">
@@ -84,7 +110,11 @@
   </div>
 
   <div class="container">
-    <h1>Loco<span style="color:#14B8A6">Berry</span><span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></h1>
+    
+<h1 style="font-size: 2.5rem; color: #7C3AED; margin-bottom: 0.25rem;">
+  LocoBerry<span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+</h1>
+
     <h2>Who We Are</h2>
     <p>
       <strong>LocoBerry is a proudly Canadian innovation, built in Waterloo — Canada’s technology startup capital.</strong><br><br>
